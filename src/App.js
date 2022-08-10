@@ -1,15 +1,21 @@
-import React from "react"
-import useInput from "./hooks/useInput"
+import React, { useRef } from "react"
+import Hover from "./components/Hover"
+import useHover from "./hooks/useHover"
 
 function App() {
-  const username = useInput('')
-  const password = useInput('')
+  const ref = useRef()
+  const isBlackHovering = useHover(ref)
 
   return (
     <div>
-      <input {...username} type={'text'} placeholder='username'/>
-      <input {...password} type={'text'} placeholder='password'/>
-      <button onClick={() => console.log(username.value, password.value)}>Click</button>
+      <Hover />
+      <div ref={ref}
+         style={{
+           width: 200,
+           height: 200,
+           background: isBlackHovering ? 'black' : 'gray'
+         }}>
+      </div>
     </div>
   )
 }
